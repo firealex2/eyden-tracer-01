@@ -5,6 +5,8 @@
 #include "PrimPlane.h"
 #include "PrimTriangle.h"
 
+#include "ICamera.h"
+
 Mat RenderFrame(ICamera& camera)
 {
 	// scene objects
@@ -27,6 +29,8 @@ Mat RenderFrame(ICamera& camera)
 			// Initialize your ray here
 			
 			// --- PUT YOUR CODE HERE ---
+
+			camera.InitRay(ray, x, y);
 			
 			Vec3f col = RGB(0, 0, 0); // background color
 			
@@ -34,10 +38,15 @@ Mat RenderFrame(ICamera& camera)
 			 * Find closest intersection with scene
 			 * objetcs and calculate color
 			 */
-			
-			 // --- PUT YOUR CODE HERE ---
-			
-			img.at<Vec3f>(y, x) = col; // store pixel color
+			if(s2.intersect(ray))
+				img.at<Vec3f>(y, x) = RGB(1,1,0);
+			if(s3.intersect(ray))
+				img.at<Vec3f>(y, x) = RGB(0,1,0);
+			if(s1.intersect(ray))
+				img.at<Vec3f>(y, x) = RGB(1,0,1);
+			if(p1.intersect(ray))
+				img.at<Vec3f>(y, x) = RGB(1, 1, 1);
+			else img.at<Vec3f>(y, x) = col; // store pixel color
 		}
 	
 	img.convertTo(img, CV_8UC3, 255);

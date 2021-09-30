@@ -30,7 +30,10 @@ public:
 	
 	virtual bool intersect(Ray& ray) const override
 	{
-		// --- PUT YOUR CODE HERE ---
+		//MoellerTrumbore alg
+
+		//const Vec3f pvec = ray.dir.cross(m_edge2);
+
 		return false;
 	}
 
